@@ -1,9 +1,11 @@
 import {
   ALargeSmall,
   Bold,
+  Code,
   Heading1,
   Heading2,
   Heading3,
+  Image,
   Italic,
   List,
   ListOrdered,
@@ -61,9 +63,20 @@ export const ToolBar = () => {
       icon: <List className={toolStyles} />,
       isActive: false,
     },
+    {
+      title: "Código",
+      icon: <Code className={toolStyles} />,
+      isActive: false,
+    },
+    {
+      title: "Imagen",
+      icon: <Image className={toolStyles} />,
+      isActive: false,
+    },
   ];
+
   return (
-    <section className="flex gap-2 p-4 bg-slate-400/10 backdrop-blur-md rounded-lg border border-slate-200/20 shadow-lg">
+    <section className="flex justify-center items-center gap-2 p-4 mx-4 bg-slate-400/10 backdrop-blur-md rounded-lg border border-slate-200/20 shadow-lg">
       {tools.map((tool, index) => (
         <ToolButton
           key={index}
