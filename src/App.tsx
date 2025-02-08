@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router";
-import Editor from "./pages/Editor";
+import Editor from "@pages/Editor";
 
 export default function App() {
   return (

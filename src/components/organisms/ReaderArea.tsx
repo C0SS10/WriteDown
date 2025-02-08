@@ -1,7 +1,7 @@
+import { ToolButtonProps } from "@/types/ToolButton";
+import { Textarea } from "@components/atoms/Textarea";
+import { ToolBar } from "@components/molecules/ToolBar";
 import { ClipboardPen, File } from "lucide-react";
-import { ToolButtonProps } from "../../types/ToolButton";
-import { ToolBar } from "../molecules/ToolBar";
-import { Textarea } from "../atoms/Textarea";
 
 export default function ReaderArea() {
   const toolStyles = "h-10 w-10 text-gray-200";
