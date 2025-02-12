@@ -13,11 +13,14 @@ import {
 } from "lucide-react";
 import { ToolButtonProps } from "@/types/ToolButton";
 import { MarkdownAreaProps } from "@/types/MarkdownArea";
+import { useMarkdown } from "@/hooks/useMarkdown";
 
 export default function MarkdownArea({
   contentMarkdown,
   onChange,
 }: MarkdownAreaProps) {
+  const { formatText } = useMarkdown(onChange);
+
   const toolStyles = "h-10 w-10 text-gray-200";
 
   const tools: ToolButtonProps[] = [
@@ -25,19 +28,19 @@ export default function MarkdownArea({
       title: "Mayúscula",
       icon: <ALargeSmall className={toolStyles} />,
       isActive: false,
-      onClick: () => console.log("Mayúscula"),
+      onClick: () => formatText("", false),
     },
     {
       title: "Negrita",
       icon: <Bold className={toolStyles} />,
       isActive: false,
-      onClick: () => console.log("Negrita"),
+      onClick: () => formatText("**", false),
     },
     {
       title: "Itálica",
       icon: <Italic className={toolStyles} />,
       isActive: false,
-      onClick: () => console.log("Itálica"),
+      onClick: () => formatText("_", false),
     },
     {
       title: "Subrayado",
@@ -81,6 +84,7 @@ export default function MarkdownArea({
     <section className="flex flex-col gap-2 items-start">
       <ToolBar tools={tools} />
       <Textarea
+        id="markdown-textarea"
         placeholder="# Esto es un título"
         value={contentMarkdown}
         onChange={onChange}

@@ -1,6 +1,7 @@
 export type TextareaProps = {
   placeholder: string;
+  id?: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (value: string) => void;
   disabled?: boolean;
 };

@@ -1,4 +1,4 @@
 export type MarkdownAreaProps = {
   contentMarkdown: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (value: string) => void;
 };

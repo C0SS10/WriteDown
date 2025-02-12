@@ -7,6 +7,8 @@ import { ToolButtonProps } from "../types/ToolButton";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
+  const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+
   const toolStyles = "h-10 w-10 text-gray-200";
 
   const tools: ToolButtonProps[] = [
@@ -20,7 +22,7 @@ export default function Editor() {
       title: "Ocultar vista previa",
       icon: <Columns2 className={toolStyles} />,
       isActive: false,
-      onClick: () => console.log("Ocultar"),
+      onClick: () => setIsPreviewVisible((prev) => !prev),
     },
   ];
 
@@ -28,10 +30,10 @@ export default function Editor() {
     <div className="h-screen w-screen flex items-center justify-center gap-4 bg-slate-700">
       <MarkdownArea
         contentMarkdown={markdownContent}
-        onChange={(e) => setMarkdownContent(e.target.value)}
+        onChange={setMarkdownContent}
       />
       <ToolBar tools={tools} isVertical={true} />
-      <ReaderArea content={markdownContent} />
+      {isPreviewVisible && <ReaderArea content={markdownContent} />}
     </div>
   );
 }

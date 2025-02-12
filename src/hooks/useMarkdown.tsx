@@ -5,7 +5,7 @@ export function useMarkdown(setContent: (value: string) => void) {
     (symbol: string, wrapper?: boolean) => {
       const markdownTextArea = document.getElementById(
         "markdown-textarea"
-      ) as HTMLTextAreaElement;
+      ) as HTMLTextAreaElement | null;
 
       if (!markdownTextArea) return;
 
