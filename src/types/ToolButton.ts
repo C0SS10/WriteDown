@@ -1,6 +1,7 @@
-export interface ToolButtonProps {
+export type ToolButtonProps = {
   title: string;
-  icon: React.ReactElement;
-  onClick?: () => void;
+  icon: React.ReactNode;
+  onClick: () => void;
   isActive: boolean;
-}
+  disabled?: boolean;
+};

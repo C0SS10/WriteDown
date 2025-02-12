@@ -3,19 +3,21 @@ import { ToolBar } from "../molecules/ToolBar";
 import {
   ALargeSmall,
   Bold,
-  Code,
   Heading1,
   Heading2,
   Heading3,
-  Image,
   Italic,
   List,
   ListOrdered,
   Strikethrough,
 } from "lucide-react";
-import { ToolButtonProps } from "../../types/ToolButton";
+import { ToolButtonProps } from "@/types/ToolButton";
+import { MarkdownAreaProps } from "@/types/MarkdownArea";
 
-export default function MarkdownArea() {
+export default function MarkdownArea({
+  contentMarkdown,
+  onChange,
+}: MarkdownAreaProps) {
   const toolStyles = "h-10 w-10 text-gray-200";
 
   const tools: ToolButtonProps[] = [
@@ -73,24 +75,16 @@ export default function MarkdownArea() {
       isActive: false,
       onClick: () => console.log("Lista desordenada"),
     },
-    {
-      title: "Código",
-      icon: <Code className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Código"),
-    },
-    {
-      title: "Imagen",
-      icon: <Image className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Imagen"),
-    },
   ];
 
   return (
-    <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2 items-start">
       <ToolBar tools={tools} />
-      <Textarea />
+      <Textarea
+        placeholder="# Esto es un título"
+        value={contentMarkdown}
+        onChange={onChange}
+      />
     </section>
   );
 }
