@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Columns2, PanelBottomOpen } from "lucide-react";
 import { ToolBar } from "@components/molecules/ToolBar";
 import MarkdownArea from "@components/organisms/MarkdownArea";
@@ -5,6 +6,7 @@ import ReaderArea from "@components/organisms/ReaderArea";
 import { ToolButtonProps } from "../types/ToolButton";
 
 export default function Editor() {
+  const [markdownContent, setMarkdownContent] = useState("");
   const toolStyles = "h-10 w-10 text-gray-200";
 
   const tools: ToolButtonProps[] = [
@@ -21,11 +23,15 @@ export default function Editor() {
       onClick: () => console.log("Ocultar"),
     },
   ];
+
   return (
     <div className="h-screen w-screen flex items-center justify-center gap-4 bg-slate-700">
-      <MarkdownArea />
+      <MarkdownArea
+        contentMarkdown={markdownContent}
+        onChange={(e) => setMarkdownContent(e.target.value)}
+      />
       <ToolBar tools={tools} isVertical={true} />
-      <ReaderArea />
+      <ReaderArea content={markdownContent} />
     </div>
   );
 }

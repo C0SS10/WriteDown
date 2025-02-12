@@ -3,7 +3,7 @@ import { Textarea } from "@components/atoms/Textarea";
 import { ToolBar } from "@components/molecules/ToolBar";
 import { ClipboardPen, File } from "lucide-react";
 
-export default function ReaderArea() {
+export default function ReaderArea({ content }: { content: string }) {
   const toolStyles = "h-10 w-10 text-gray-200";
 
   const tools: ToolButtonProps[] = [
@@ -24,7 +24,7 @@ export default function ReaderArea() {
   return (
     <div className="flex flex-col gap-2 items-end">
       <ToolBar tools={tools} />
-      <Textarea />
+      <Textarea placeholder="Markdown convertido" value={content} />
     </div>
   );
 }
