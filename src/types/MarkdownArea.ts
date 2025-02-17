@@ -1,4 +1,10 @@
 export type MarkdownAreaProps = {
   contentMarkdown: string;
-  onChange: (value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  isToolbarVisible: boolean;
+};
+
+export type ReaderAreaProps = {
+  content: string;
+  isToolbarVisible: boolean;
 };

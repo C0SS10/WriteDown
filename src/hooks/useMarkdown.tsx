@@ -1,44 +1,22 @@
-import { useCallback } from "react";
+import { useRef } from "react";
 
-export function useMarkdown(setContent: (value: string) => void) {
-  const formatText = useCallback(
-    (symbol: string, wrapper?: boolean) => {
-      const markdownTextArea = document.getElementById(
-        "markdown-textarea"
-      ) as HTMLTextAreaElement | null;
+export function useMarkdown() {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-      if (!markdownTextArea) return;
+  const getSelection = () => {
+    if (!textareaRef.current) return { start: 0, end: 0 };
+    return {
+      start: textareaRef.current.selectionStart,
+      end: textareaRef.current.selectionEnd,
+    };
+  };
 
-      const { selectionStart, selectionEnd, value } = markdownTextArea;
-      const selectedText = value.substring(selectionStart, selectionEnd);
+  const setSelection = (start: number, end: number) => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+      textareaRef.current.setSelectionRange(start, end);
+    }
+  };
 
-      let newText = "";
-
-      if (selectedText) {
-        newText = wrapper
-          ? `${symbol}${selectedText}${symbol}`
-          : `${symbol} ${selectedText}`;
-      } else {
-        newText = wrapper ? `${symbol} ${symbol}` : `${symbol}`;
-      }
-
-      const updateContent =
-        value.substring(0, selectionStart) +
-        newText +
-        value.substring(selectionEnd);
-
-      setContent(updateContent);
-
-      // Mover el cursor al final del texto
-      const cursorPosition = selectionStart + newText.length;
-      setTimeout(
-        () =>
-          markdownTextArea.setSelectionRange(cursorPosition, cursorPosition),
-        0
-      );
-    },
-    [setContent]
-  );
-
-  return { formatText };
+  return { textareaRef, getSelection, setSelection };
 }

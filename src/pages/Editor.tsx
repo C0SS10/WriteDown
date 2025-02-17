@@ -8,21 +8,24 @@ import { ToolButtonProps } from "../types/ToolButton";
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
   const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+  const [isToolbarVisible, setIsToolbarVisible] = useState(true);
 
   const toolStyles = "h-10 w-10 text-gray-200";
 
   const tools: ToolButtonProps[] = [
     {
-      title: "Ocultar barra de herramientas",
+      title: isToolbarVisible
+        ? "Ocultar barra de herramientas"
+        : "Mostrar barra de herramientas",
       icon: <PanelBottomOpen className={toolStyles} />,
       isActive: false,
-      onClick: () => console.log("Ocultar barra"),
+      onClick: () => setIsToolbarVisible((isVisible) => !isVisible),
     },
     {
-      title: "Ocultar vista previa",
+      title: isPreviewVisible ? "Ocultar vista previa" : "Mostrar vista previa",
       icon: <Columns2 className={toolStyles} />,
       isActive: false,
-      onClick: () => setIsPreviewVisible((prev) => !prev),
+      onClick: () => setIsPreviewVisible((isVisible) => !isVisible),
     },
   ];
 
@@ -30,10 +33,16 @@ export default function Editor() {
     <div className="h-screen w-screen flex items-center justify-center gap-4 bg-slate-700">
       <MarkdownArea
         contentMarkdown={markdownContent}
-        onChange={setMarkdownContent}
+        onChange={(e) => setMarkdownContent(e.target.value)}
+        isToolbarVisible={isToolbarVisible}
       />
       <ToolBar tools={tools} isVertical={true} />
-      {isPreviewVisible && <ReaderArea content={markdownContent} />}
+      {isPreviewVisible && (
+        <ReaderArea
+          content={markdownContent}
+          isToolbarVisible={isToolbarVisible}
+        />
+      )}
     </div>
   );
 }
