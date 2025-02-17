@@ -75,9 +75,8 @@ export const strikethrough: MarkdownTool = {
       return (
         content.slice(0, start) + selectedText.slice(1, -1) + content.slice(end)
       );
-    } else {
-      return content.slice(0, start) + `~${selectedText}~` + content.slice(end);
     }
+    return content.slice(0, start) + `~${selectedText}~` + content.slice(end);
   },
 };
 
@@ -87,6 +86,11 @@ export const heading: MarkdownTool = {
   isActive: false,
   onClick: (content, start, end) => {
     const selectedText = content.slice(start, end);
+    if (selectedText.startsWith("#")) {
+      return (
+        content.slice(0, start) + selectedText.slice(1) + content.slice(end)
+      );
+    }
     return content.slice(0, start) + `# ${selectedText}` + content.slice(end);
   },
 };
@@ -97,6 +101,11 @@ export const subheading: MarkdownTool = {
   isActive: false,
   onClick: (content, start, end) => {
     const selectedText = content.slice(start, end);
+    if (selectedText.startsWith("##")) {
+      return (
+        content.slice(0, start) + selectedText.slice(2) + content.slice(end)
+      );
+    }
     return content.slice(0, start) + `## ${selectedText}` + content.slice(end);
   },
 };
@@ -107,64 +116,45 @@ export const subitem: MarkdownTool = {
   isActive: false,
   onClick: (content, start, end) => {
     const selectedText = content.slice(start, end);
+    if (selectedText.startsWith("###")) {
+      return (
+        content.slice(0, start) + selectedText.slice(3) + content.slice(end)
+      );
+    }
     return content.slice(0, start) + `### ${selectedText}` + content.slice(end);
   },
 };
 
-/* const tools: ToolButtonProps[] = [
-    {
-      title: "Mayúscula",
-      icon: <ALargeSmall className={toolStyles} />,
-      isActive: false,
-      onClick: () => handleToolClick(),
-    },
-    {
-      title: "Negrita",
-      icon: <Bold className={toolStyles} />,
-      isActive: false,
-      onClick: () => handleBold(),
-    },
-    {
-      title: "Itálica",
-      icon: <Italic className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("first"),
-    },
-    {
-      title: "Subrayado",
-      icon: <Strikethrough className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Subrayado"),
-    },
-    {
-      title: "Título",
-      icon: <Heading1 className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Título"),
-    },
-    {
-      title: "Subtítulo",
-      icon: <Heading2 className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Subtítulo"),
-    },
-    {
-      title: "Subitem",
-      icon: <Heading3 className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Subitem"),
-    },
-    {
-      title: "Lista ordenada",
-      icon: <ListOrdered className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Lista ordenada"),
-    },
-    {
-      title: "Lista desordenada",
-      icon: <List className={toolStyles} />,
-      isActive: false,
-      onClick: () => console.log("Lista desordenada"),
-    },
-  ];
- */
+export const orderedList: MarkdownTool = {
+  title: "Lista ordenada",
+  icon: <ListOrdered className="h-10 w-10 text-gray-200" />,
+  isActive: false,
+  onClick: (content, start, end) => {
+    const selectedText = content.slice(start, end);
+    if (selectedText.startsWith("1.")) {
+      return (
+        content.slice(0, start) + selectedText.slice(3) + content.slice(end)
+      );
+    }
+    return (
+      content.slice(0, start) + `1. ${selectedText}\n2. ` + content.slice(end)
+    );
+  },
+};
+
+export const unorderedList: MarkdownTool = {
+  title: "Lista desordenada",
+  icon: <List className="h-10 w-10 text-gray-200" />,
+  isActive: false,
+  onClick: (content, start, end) => {
+    const selectedText = content.slice(start, end);
+    if (selectedText.startsWith("• ")) {
+      return (
+        content.slice(0, start) + selectedText.slice(3) + content.slice(end)
+      );
+    }
+    return (
+      content.slice(0, start) + `• ${selectedText}\n• ` + content.slice(end)
+    );
+  },
+};

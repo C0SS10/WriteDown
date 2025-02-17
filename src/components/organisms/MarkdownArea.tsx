@@ -4,7 +4,17 @@ import { ToolButtonProps } from "@/types/ToolButton";
 import { MarkdownAreaProps } from "@/types/MarkdownArea";
 import { MarkdownTool } from "@/types/MarkdownTools";
 import { useMarkdown } from "@/hooks/useMarkdown";
-import { bold, uppercase } from "@/utils/markdownTools";
+import {
+  bold,
+  heading,
+  italic,
+  orderedList,
+  strikethrough,
+  subheading,
+  subitem,
+  unorderedList,
+  uppercase,
+} from "@/utils/markdownTools";
 
 export default function MarkdownArea({
   contentMarkdown,
@@ -22,7 +32,17 @@ export default function MarkdownArea({
     setSelection(start, end);
   };
 
-  const tools: ToolButtonProps[] = [uppercase, bold].map((tool) => ({
+  const tools: ToolButtonProps[] = [
+    uppercase,
+    bold,
+    italic,
+    strikethrough,
+    heading,
+    subheading,
+    subitem,
+    orderedList,
+    unorderedList,
+  ].map((tool) => ({
     ...tool,
     onClick: () => handleToolClick(tool),
   }));
