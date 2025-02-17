@@ -28,7 +28,11 @@ export default function ReaderArea({
   return (
     <div className="flex flex-col gap-2 items-end">
       {isToolbarVisible && <ToolBar tools={tools} />}
-      <Textarea placeholder="Markdown convertido" value={content} />
+      <Textarea
+        placeholder="Markdown convertido"
+        value={content}
+        disabled={true}
+      />
     </div>
   );
 }
