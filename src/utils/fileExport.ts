@@ -4,12 +4,13 @@ export async function exportIntoPDF() {
   const fileContent = document.getElementById("file-content");
   if (!fileContent) return;
 
+  // Crear un nuevo PDF
+  const pdf = new jsPDF("p", "cm", "a4");
+
+  pdf.addFont("Roboto-normal.ttf", "Roboto", "normal");
+  pdf.setFont("Roboto");
+
   try {
-    // Crear un nuevo PDF
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    pdf.setFont("courier");
-
     await pdf.html(fileContent, {
       callback: (pdf) => {
         pdf.save("WriteDown.pdf");
