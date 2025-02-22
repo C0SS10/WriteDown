@@ -8,14 +8,12 @@ import {
   Italic,
   List,
   ListOrdered,
-  Strikethrough,
 } from "lucide-react";
 import {
   formatBold,
   formatHeading,
   formatItalic,
   formatOrderedList,
-  formatStrikethrough,
   formatSubheading,
   formatSubitem,
   formatUnorderedList,
@@ -41,13 +39,6 @@ export const italic: MarkdownTool = {
   icon: <Italic className="h-10 w-10 text-gray-200" />,
   isActive: false,
   onClick: formatItalic,
-};
-
-export const strikethrough: MarkdownTool = {
-  title: "Tachado",
-  icon: <Strikethrough className="h-10 w-10 text-gray-200" />,
-  isActive: false,
-  onClick: formatStrikethrough,
 };
 
 export const heading: MarkdownTool = {
