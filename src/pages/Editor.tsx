@@ -3,7 +3,7 @@ import { Columns2, PanelBottomOpen } from "lucide-react";
 import { ToolBar } from "@components/molecules/ToolBar";
 import MarkdownArea from "@components/organisms/MarkdownArea";
 import ReaderArea from "@components/organisms/ReaderArea";
-import { ToolButtonProps } from "../types/ToolButton";
+import { ToolButtonProps } from "@/types/ToolButton";
 
 export default function Editor() {
   const [markdownContent, setMarkdownContent] = useState("");
